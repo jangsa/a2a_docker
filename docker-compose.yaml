@@ -2,74 +2,75 @@ services:
   a2a_crewai:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: crewai.Dockerfile
     container_name: a2a_crewai
     ports:
       - "10001:10001"
     volumes:
-      - ~/dev/docker/a2a:/work/host
-    working_dir: /work/host/A2A/samples/python/agents/crewai/
+      - ./:/home/root/
+    # working_dir: /home/root/A2A/samples/python/agents/crewai/
     # tty: true
     # stdin_open: true
-    command: sh -c "uv python pin 3.12 && uv venv && /bin/bash -c \"source .venv/bin/activate\" && uv run . --host 0.0.0.0 --reload"
+    # command: sh -c "/bin/bash -c \"source .venv/bin/activate\" && uv run . --host 0.0.0.0 --reload"
+    command: sh -c "cd scripts && ./crewai.sh"
     environment:
       GOOGLE_API_KEY: $GOOGLE_API_KEY
     networks:
       - a2a_group
 
-  a2a_host:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: a2a_host
-    ports:
-      - "12000:12000"
-    volumes:
-      - ~/dev/docker/a2a:/work/host
-    working_dir: /work/host/A2A/demo/ui/
-    # tty: true
-    # stdin_open: true
-    command: sh -c "uv run main.py"
-    environment:
-      GOOGLE_API_KEY: $GOOGLE_API_KEY
-    networks:
-      - a2a_group
+#  a2a_host:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    container_name: a2a_host
+#    ports:
+#      - "12000:12000"
+#    volumes:
+#      - ~/dev/docker/a2a:/work/host
+#    working_dir: /work/host/A2A/demo/ui/
+#    # tty: true
+#    # stdin_open: true
+#    command: sh -c "uv run main.py"
+#    environment:
+#      GOOGLE_API_KEY: $GOOGLE_API_KEY
+#    networks:
+#      - a2a_group
 
-  a2a_google_adk:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: a2a_google_adk
-    ports:
-      - "10002:10002"
-    volumes:
-      - ~/dev/docker/a2a:/work/host
-    working_dir: /work/host/A2A/samples/python/agents/google_adk/
-    # tty: true
-    # stdin_open: true
-    command: sh -c "uv venv && /bin/bash -c \"source .venv/bin/activate\" && uv run . --host 0.0.0.0 --port 10002"
-    environment:
-      GOOGLE_API_KEY: $GOOGLE_API_KEY
-    networks:
-      - a2a_group
-
-  a2a_langgraph:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: a2a_langgraph
-    ports:
-      - "8080:8080"
-    volumes:
-      - ~/dev/docker/a2a:/work/host
-    working_dir: /work/host/A2A/samples/python/agents/langgraph/
-    # tty: true
-    # stdin_open: true
-    command: sh -c "uv venv && /bin/bash -c \"source .venv/bin/activate\" && uv run . --host 0.0.0.0 --port 8080"
-    environment:
-      GOOGLE_API_KEY: $GOOGLE_API_KEY
-    networks:
-      - a2a_group
+#  a2a_google_adk:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    container_name: a2a_google_adk
+#    ports:
+#      - "10002:10002"
+#    volumes:
+#      - ~/dev/docker/a2a:/work/host
+#    working_dir: /work/host/A2A/samples/python/agents/google_adk/
+#    # tty: true
+#    # stdin_open: true
+#    command: sh -c "uv venv && /bin/bash -c \"source .venv/bin/activate\" && uv run . --host 0.0.0.0 --port 10002"
+#    environment:
+#      GOOGLE_API_KEY: $GOOGLE_API_KEY
+#    networks:
+#      - a2a_group
+#
+#  a2a_langgraph:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    container_name: a2a_langgraph
+#    ports:
+#      - "8080:8080"
+#    volumes:
+#      - ~/dev/docker/a2a:/work/host
+#    working_dir: /work/host/A2A/samples/python/agents/langgraph/
+#    # tty: true
+#    # stdin_open: true
+#    command: sh -c "uv venv && /bin/bash -c \"source .venv/bin/activate\" && uv run . --host 0.0.0.0 --port 8080"
+#    environment:
+#      GOOGLE_API_KEY: $GOOGLE_API_KEY
+#    networks:
+#      - a2a_group
 
 networks:
   a2a_group:

@@ -578,4 +578,6 @@ FodyWeavers.xsd
 *.sln.iml
 
 
-
+# custom
+A2A/
+*.swo
