@@ -1,8 +1,7 @@
 #!/bin/bash
 
-cd /home/root/A2A/samples/python/agents/crewai/
+cd /home/root/A2A/samples/python/agents/google_adk/
 
-uv python pin 3.12
 # if there's not a .venv file, create a virtual environment
 if [ ! -d ".venv" ]; then
     echo "Creating virtual environment..."
@@ -13,4 +12,4 @@ fi
 
 source .venv/bin/activate
 
-uv run . --host 0.0.0.0
+uv run . --host 0.0.0.0 --port 10002
